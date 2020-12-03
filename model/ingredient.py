@@ -1,4 +1,5 @@
 from database import db
+from model.food import Food
 
 class Ingredient(db.Model):
     __tablename__ = "ingredient"
@@ -20,3 +21,10 @@ class Ingredient(db.Model):
         record = Ingredient(name=name)
         db.session.add(record)
         db.session.commit()
+
+    # idから食材を取得
+    @staticmethod
+    def getIngredientFromId(id):
+        ingredient = db.session.query(Ingredient).get(id)
+        return ingredient
+

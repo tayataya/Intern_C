@@ -19,9 +19,22 @@ class Cook(db.Model):
         cooks = db.session.query(Cook).all()
         return cooks
 
+    # 料理idから食材idリストを取得
+    @staticmethod
+    def getIngredientIdsFromFoodId(foodId):
+        ings = db.session.query(Cook).filter_by(food_id=foodId).all()
+        if ings is None:
+            return None
+        ids = []
+        for ing in ings:
+            ids.append(ing.ingredient_id)
+        return ids
+
     # 料理に必要な食材を追加
     @staticmethod
     def setCook(foodId, ingredientId):
         record = Cook(foodId=foodId, ingredientId=ingredientId)
         db.session.add(record)
         db.session.commit()
+
+

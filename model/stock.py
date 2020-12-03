@@ -11,9 +11,10 @@ class Stock(db.Model):
     price = db.Column(db.Integer, nullable=False)  # 価格
     amount = db.Column(db.Integer, nullable=False)          # 在庫数量
 
-    def __init__(self, productId, shopId, amount):
+    def __init__(self, productId, shopId, price, amount):
         self.product_id = productId
         self.shop_id = shopId
+        self.price = price
         self.amount = amount
 
     # 全ての在庫を取得
@@ -24,7 +25,7 @@ class Stock(db.Model):
 
     # 在庫を追加
     @staticmethod
-    def setStock(productId, shopId, amount):
-        record = Stock(productId=productId, shopId=shopId, amount=amount)
+    def setStock(productId, shopId, price, amount):
+        record = Stock(productId=productId, shopId=shopId, price=price, amount=amount)
         db.session.add(record)
         db.session.commit()

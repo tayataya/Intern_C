@@ -14,6 +14,12 @@ class Food(db.Model):
         foods = db.session.query(Food).all()
         return foods
 
+    # 料理名から料理を取得
+    @staticmethod
+    def getFoodByName(foodName):
+        food = db.session.query(Food).filter_by(name=foodName).first()
+        return food
+
     # 料理を追加
     @staticmethod
     def setFood(name):

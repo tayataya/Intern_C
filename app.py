@@ -1,16 +1,19 @@
 from flask import Flask, send_from_directory,render_template
 import os
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, Unicode, UnicodeText, ForeignKey
-from sqlalchemy.orm import relationship, backref
-from datetime import datetime
-from database import db
-from models import Food, Ingredient
+from database import db, db_init
+from model.product import Product
+from model.cook import Cook
+from model.food import Food
+from model.ingredient import Ingredient
+from model.product import Product
+from model.shop import Shop
+from model.stock import Stock
+
+
 app = Flask(__name__)
 
 app.config.from_object('dbConfig.DbConfig')
-db.init_app(app)
-
+db_init(app)
 
 @app.route('/')
 def hello_world():
@@ -33,8 +36,9 @@ def favicon():
 
 @app.route('/init')
 def initdatabase():
-    for v in range(1,10):
-        Ingredient.setIngredient("Ingredient" + str(v))
+    # Food.setFood("カレー")
+    # Food.setFood("肉じゃが")
+    # Food.setFood("ハンバーグ")
     return "done"
 
 if __name__ == '__main__':

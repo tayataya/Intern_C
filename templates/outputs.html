@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!--  CSS -->
+    <link rel="stylesheet" href="static/style.css">
+   <!--<link rel="stylesheet" href="{{url_for('static',filename = 'style.css')}}">-->
+ </head>
+  <body>
+    <h3 class="text-muted">Materials</h3>
+    <ol>
+      <li>材料名:{{message.name}}</li>
+      <li>店舗名：{{message.shop_name}}</li>
+      <li>価格：{{message.value}}</li>
+      <li>在庫数：{{message.stock_num}}</li>
+    </ol>
+
+  </body>
+</html>

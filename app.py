@@ -3,7 +3,7 @@ from random import randint
 from flask import Flask, send_from_directory,render_template
 import os
 from database import db, db_init
-import repository
+import service
 
 
 app = Flask(__name__)
@@ -31,7 +31,7 @@ def favicon():
 # 料理名から食材名のリストを取得するサンプルです。
 @app.route('/test')
 def test():
-    ingredients = repository.getIngredientsFromFoodName("ハンバーグ")
+    ingredients = service.getIngredientsFromFoodName("ハンバーグ")
     output = ""
     for ing in ingredients:
         output += (str(ing.name) + "<br>")
@@ -41,7 +41,7 @@ def test():
 # データベースに初期値を入れます。 最初の1回のみ実行できます。
 @app.route('/init')
 def initdatabase():
-    repository.initialize()
+    service.initialize()
     return "done"
 
 if __name__ == '__main__':

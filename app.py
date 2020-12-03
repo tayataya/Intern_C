@@ -4,8 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, Unicode, UnicodeText, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from datetime import datetime
-
+from database import db
+from models import Food, Ingredient
 app = Flask(__name__)
+
+app.config.from_object('dbConfig.DbConfig')
+db.init_app(app)
 
 
 @app.route('/')
@@ -18,5 +22,11 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/img'), 'favicon.ico', )
 
 
+@app.route('/init')
+def initdatabase():
+    for v in range(1,10):
+        Ingredient.setIngredient("Ingredient" + str(v))
+    return "done"
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

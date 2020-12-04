@@ -24,6 +24,12 @@ class Product(db.Model):
         db.session.add(record)
         db.session.commit()
 
+    # 食材idから商品を取得
+    @staticmethod
+    def getProductFromIngredientId(ingredientId):
+        products = db.session.query(Product).filter_by(ingredient_id=ingredientId).all()
+        return products
+
    # idから商品名を取得
     @staticmethod
     def getProductNameFromId(id):

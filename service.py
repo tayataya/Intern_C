@@ -8,6 +8,27 @@ from model.product import Product
 from model.shop import Shop
 from model.stock import Stock
 
+# watsonを呼び出す関数（質問）
+# 食材入力ページへのURLを返す
+def callWatson1(question):
+    return question
+
+# watson2を呼び出す関数（料理）
+# 表記ゆれがなくなった料理名を返す
+def callWatson2(question):
+    return question
+
+
+# 料理名から食材と商品のセットを取得
+def getIngredientsAndProductsFromFoodName(foodName):
+    result = []
+    ingredients = getIngredientsFromFoodName(foodName)
+    for ing in ingredients:
+        products = Product.getProductFromIngredientId(ing.id)
+        result.append([ing,products])
+    return result
+
+
 # 料理名から食材のリストを取得
 def getIngredientsFromFoodName(foodName):
     food = Food.getFoodByName(foodName)

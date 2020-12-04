@@ -51,10 +51,17 @@ def favicon():
 # 料理名から食材名のリストを取得するサンプルです。
 @app.route('/test')
 def test():
-    ingredients = service.getIngredientsFromFoodName("ハンバーグ")
     output = ""
-    for ing in ingredients:
-        output += (str(ing.name) + "<br>")
+    # ingredients = service.getIngredientsFromFoodName("ハンバーグ")
+    # for ing in ingredients:
+    #     output += (str(ing.name) + "<br>")
+
+    ingAndPrs = service.getIngredientsAndProductsFromFoodName("カレー")
+    for ingandpr in ingAndPrs:
+        output+=str(ingandpr[0].name) + "<br>"
+        for pro in ingandpr[1]:
+            output +=(str(str(pro.name)))
+        output+="<br>"
     return output
 
 

@@ -1,6 +1,6 @@
 from random import randint
 
-from flask import Flask, send_from_directory,render_template
+from flask import Flask, send_from_directory,render_template, request
 import os
 from database import db, db_init
 
@@ -12,8 +12,15 @@ app = Flask(__name__)
 db_init(app)
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def form():
+   return render_template('form.html')
+
+@app.route('/confirm', methods = ['POST', 'GET'])
+def confirm():
+   if request.method == 'POST':
+      result = request.form
+      return render_template("confirm.html",result = result)
+
 
 @app.route("/index") #アプリケーション/indexにアクセスが合った場合
 def index():
@@ -58,4 +65,4 @@ def initdatabase():
     return "done"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)

@@ -23,3 +23,9 @@ class Product(db.Model):
         record = Product(name=name, ingredientId=ingredientId)
         db.session.add(record)
         db.session.commit()
+
+   # idから商品名を取得
+    @staticmethod
+    def getProductNameFromId(id):
+        product_name = db.session.query(Product).get(id)
+        return product_name

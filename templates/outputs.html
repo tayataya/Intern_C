@@ -11,12 +11,12 @@
  </head>
   <body>
     <h3 class="text-muted">Materials</h3>
-    <ol>
-      <li>材料名:{{message.name}}</li>
-      <li>店舗名：{{message.shop_name}}</li>
-      <li>価格：{{message.value}}</li>
-      <li>在庫数：{{message.stock_num}}</li>
-    </ol>
+    <h class="text-muted">商品名/店舗名/価格/在庫</h>
+    <ul>
+      {% for list in message %}
+        <li>{{list}}</li>
+      {% endfor %}
+      </ul>
 
   </body>
 </html>

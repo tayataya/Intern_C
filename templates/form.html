@@ -1,8 +1,16 @@
 <html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+  </head>
    <body>
-      <form action = "/confirm" method = "POST">
-         <p>今夜の献立を教えてください<input type = "text" name = "menu" /></p>
-         <p><input type = "submit" value = "送信" /></p>
-      </form>
+      <div class="container">
+        <h4>献立検索サイト</h4>
+        <form action = "/confirm" method = "POST">
+           <p>今夜の献立を教えてください<input type = "text" name = "menu" /></p>
+           <p><input type = "submit" value = "検索" /></p>
+        </form>
+
+      </div>
    </body>
 </html>

@@ -34,7 +34,6 @@ def index():
         db="jse_intern",
         user='jseintern',
         password= 'jseintern+',
-
     )
     cursor=connection.cursor()
     #stock情報を取得
@@ -75,7 +74,7 @@ def initdatabase():
     service.initialize()
     return "done"
 
-@app.route("/show") #アプリケーション/showにアクセスがあった場合
+@app.route("/show", methods = ['POST', 'GET']) #アプリケーション/showにアクセスがあった場合
 def show():
     #データベース接続
     connection=pymysql.connect(
@@ -86,7 +85,7 @@ def show():
 
     )
     cursor=connection.cursor()
-    food_name="カレー"
+    food_name=request.form["menu"]
     product_name_list=[]
     coming_list= service.getIngredientsAndProductsFromFoodName(food_name)
     for ing in coming_list:
@@ -103,8 +102,8 @@ def show():
         #stock内のidを名前に変換してHTMLに送る
         #product_name_listに格納済みの選択された料理の商品のみ表示
         if str(service.getProductNameFromId(i[1])) in product_name_list:
-            stock_dict.append(list([str(Ingredient.getIngredientFromId(Product.getProductNameFromId(i[1]).id).name),str(service.getProductNameFromId(i[1])),str(service.getShopNameFromId(i[2])),str(i[3]),str(i[4])]))
-            # stock_dict.append(list([str(Ingredient.getIngredientFromId(Product.getProductNameFromId(i[1]).ingredient_id).name),str(service.getProductNameFromId(i[1])),str(service.getShopNameFromId(i[2])),str(i[3]),str(i[4])]))
+            #stock_dict.append(list([str(Ingredient.getIngredientFromId(Product.getProductNameFromId(i[1]).id).name),str(service.getProductNameFromId(i[1])),str(service.getShopNameFromId(i[2])),str(i[3]),str(i[4])]))
+             stock_dict.append(list([str(Ingredient.getIngredientFromId(Product.getProductNameFromId(i[1]).ingredient_id).name),str(service.getProductNameFromId(i[1])),str(service.getShopNameFromId(i[2])),str(i[3]),str(i[4])]))
 
     return render_template('show.html',food=food_name,message=stock_dict)
     

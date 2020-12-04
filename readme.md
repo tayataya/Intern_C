@@ -9,3 +9,6 @@ CREATE DATABASE jse_intern;
 CREATE USER 'jseintern' identified by 'jseintern+';
 GRANT ALL PRIVILEGES ON jse_intern.* TO jseintern;
 ```
+
+## アクセス
+app.pyを起動し http://localhost:5000にアクセスしてください。

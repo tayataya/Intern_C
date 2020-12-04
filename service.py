@@ -8,6 +8,16 @@ from model.product import Product
 from model.shop import Shop
 from model.stock import Stock
 
+# 料理名から食材と商品のセットを取得
+def getIngredientsAndProductsFromFoodName(foodName):
+    result = []
+    ingredients = getIngredientsFromFoodName(foodName)
+    for ing in ingredients:
+        products = Product.getProductFromIngredientId(ing.id)
+        result.append([ing,products])
+    return result
+
+
 # 料理名から食材のリストを取得
 def getIngredientsFromFoodName(foodName):
     food = Food.getFoodByName(foodName)

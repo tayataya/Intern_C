@@ -19,6 +19,16 @@ def getIngredientsFromFoodName(foodName):
         ingredients.append(Ingredient.getIngredientFromId(id))
     return ingredients
 
+# 商品idから商品名を取得
+def getProductNameFromId(id):
+    product_name = Product.getProductNameFromId(id)
+    return product_name.name
+
+# 店舗idから店舗名を取得
+def getShopNameFromId(id):
+    shop_name = Shop.getShopNameFromId(id)
+    return shop_name.name
+
 def initialize():
     Food.setFood("カレー")
     Food.setFood("肉じゃが")

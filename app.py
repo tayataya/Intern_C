@@ -4,7 +4,7 @@ from flask import Flask, send_from_directory,render_template
 import os
 from database import db, db_init
 import repository
-
+import pymysql
 
 app = Flask(__name__)
 
@@ -16,13 +16,25 @@ def hello_world():
 
 @app.route("/index") #アプリケーション/indexにアクセスが合った場合
 def index():
+    #データベース接続
+    connection=pymysql.connect(
+        host="localhost",
+        db="jse_intern",
+        user='jseintern',
+        password= 'jseintern+',
 
-    materials = {}
-    materials['name'] = "jinja"
-    materials['shop_name']=list(["shop1","shop2","shop3"])
-    materials['value']=list([100,200,300])
-    materials['stock_num'] = list([10,20,30])
-    return render_template('outputs.html',message=materials)
+    )
+    cursor=connection.cursor()
+    #stock情報を取得
+    cursor.execute("SELECT * FROM stock")
+    materials = cursor.fetchall()
+
+    stock_dict=[]
+    for i in materials:
+        #stock内のidを名前に変換してHTMLに送る
+        stock_dict.append(list([str(repository.getProductNameFromId(i[1])),str(repository.getShopNameFromId(i[2])),str(i[3]),str(i[4])]))
+
+    return render_template('outputs.html',message=stock_dict)
 
 @app.route('/favicon.ico')
 def favicon():

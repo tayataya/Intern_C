@@ -21,3 +21,9 @@ class Shop(db.Model):
         record = Shop(name = name)
         db.session.add(record)
         db.session.commit()
+
+    # idから店舗名を取得
+    @staticmethod
+    def getShopNameFromId(id):
+        shop_name = db.session.query(Shop).get(id)
+        return shop_name

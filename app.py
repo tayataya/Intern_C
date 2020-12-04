@@ -103,7 +103,7 @@ def show():
         #stock内のidを名前に変換してHTMLに送る
         #product_name_listに格納済みの選択された料理の商品のみ表示
         if str(service.getProductNameFromId(i[1])) in product_name_list:
-            stock_dict.append(list([str(Ingredient.getIngredientFromId(Product.getProductNameFromId(i[1]).id).name),str(service.getProductNameFromId(i[1])),str(service.getShopNameFromId(i[2])),str(i[3]),str(i[4])]))
+            stock_dict.append(list([str(Ingredient.getIngredientFromId(Product.getProductNameFromId(i[1]).ingredient_id).name),str(service.getProductNameFromId(i[1])),str(service.getShopNameFromId(i[2])),str(i[3]),str(i[4])]))
 
     return render_template('show.html',food=food_name,message=stock_dict)
     
